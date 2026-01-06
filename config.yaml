@@ -1,39 +1,28 @@
 # WARNING: Do not commit your sensitive credentials
 servers:
+  # Local development - use with: kubectl port-forward svc/analytics-spark-history-server 18080:18080 -n analytics
   local:
-    default: true  # if server name is not provided in tool calls, this Spark History Server is used
+    default: false
     url: "http://localhost:18080"
-    # Optional authentication (can also use environment variables).
-    # auth:
-    #   username: ${SHS_SERVERS_LOCAL_AUTH_USERNAME}
-    #   password: ${SHS_SERVERS_LOCAL_AUTH_PASSWORD}
-    #   token: ${SHS_SPARK_TOKEN}
 
-  # Production server example
-  # production:
-  #   url: "https://spark-history.company.com:18080"
+  # MongoDB datwarehouse Staging - use directly over VPN
+  datawarehouse-staging:
+    default: true
+    url: "https://spark-history-server.datawarehouse.staging.corp.mongodb.com"
+    verify_ssl: true
+
+  # MongoDB Datawarehouse Staging (if available)
+  # datawarehouse-staging:
+  #   default: false
+  #   url: "https://spark-history.datawarehouse.staging.corp.mongodb.com"
   #   verify_ssl: true
-  #   auth:
-      # Use environment variables for production
-      # username: ${SHS_SERVERS_PRODUCTION_AUTH_USERNAME}
-      # password: ${SHS_SERVERS_PRODUCTION_AUTH_PASSWORD}
-      # token: ${SHS_SPARK_TOKEN}
 
-  # Staging server example
-  # staging:
-  #   url: "https://staging-spark-history.company.com:18080"
-  #   verify_ssl: true
-  #   auth:
-      # username: ${SHS_SERVERS_STAGING_AUTH_USERNAME}
-      # token: ${SHS_SERVERS_STAGING_AUTH_PASSWORD}
-
-  # AWS Glue Spark History Server example
-  # glue_ec2:
-  #   url: ""
-  #   verify_ssl: false
-
-  # Amazon EMR-EC2 Spark History Server example
-#    emr_cluster_arn: "<EMR Cluster ARN>"
+  # AWS EMR Spark History Server
+  # Requires AWS credentials with EMR permissions
+  emr:
+    default: false
+    emr_cluster_arn: "arn:aws:emr:us-east-1:YOUR_ACCOUNT_ID:cluster/YOUR_CLUSTER_ID"
+    timeout: 30
 
 mcp:
   transports:
