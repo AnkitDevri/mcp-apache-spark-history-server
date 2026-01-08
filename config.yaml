@@ -21,7 +21,7 @@ servers:
   # Requires AWS credentials with EMR permissions
   emr:
     default: false
-    emr_cluster_arn: "arn:aws:emr:us-east-1:YOUR_ACCOUNT_ID:cluster/YOUR_CLUSTER_ID"
+    emr_cluster_arn: "arn:aws:emr:us-east-1:348517286947:cluster/j-137GGY09BMTUC"
     timeout: 30
 
 mcp:
