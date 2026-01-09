@@ -61,6 +61,7 @@ class ServerConfig(BaseSettings):
     default: bool = False
     verify_ssl: bool = True
     emr_cluster_arn: Optional[str] = None  # EMR specific field
+    aws_profile: Optional[str] = None  # AWS profile for EMR authentication
     use_proxy: bool = False
     timeout: int = 30  # HTTP request timeout in seconds
     include_plan_description: Optional[bool] = None

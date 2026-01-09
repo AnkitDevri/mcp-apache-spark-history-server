@@ -1,32 +1,20 @@
 # WARNING: Do not commit your sensitive credentials
 servers:
-  # Local development - use with: kubectl port-forward svc/analytics-spark-history-server 18080:18080 -n analytics
+  # Local development - use with: kubectl port-forward svc/spark-history-server 18080:18080 -n datawarehouse
   local:
-    default: false
+    default: true
     url: "http://localhost:18080"
 
-  # MongoDB datwarehouse Staging - use directly over VPN
-  datawarehouse-staging:
-    default: true
-    url: "https://spark-history-server.datawarehouse.staging.corp.mongodb.com"
-    verify_ssl: true
-
-  # MongoDB Datawarehouse Staging (if available)
-  # datawarehouse-staging:
-  #   default: false
-  #   url: "https://spark-history.datawarehouse.staging.corp.mongodb.com"
-  #   verify_ssl: true
-
   # AWS EMR Spark History Server
-  # Requires AWS credentials with EMR permissions
   emr:
     default: false
-    emr_cluster_arn: "arn:aws:emr:us-east-1:348517286947:cluster/j-137GGY09BMTUC"
+    emr_cluster_arn: "arn:aws:elasticmapreduce:us-east-1:348517286947:cluster/j-25XEQ6S0CFWF6"
+    aws_profile: "prod"  # Use your prod AWS SSO profile
     timeout: 30
 
 mcp:
   transports:
-    - streamable-http # streamable-http or stdio. you can only specify one right now.
+    - stdio  # Use stdio for VS Code Augment integration
   port: "18888"
   debug: true
   address: localhost

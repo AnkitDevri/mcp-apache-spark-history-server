@@ -38,10 +38,19 @@ class EMRPersistentUIClient:
         self.region = self.emr_cluster_arn.split(":")[3]  # Extract region from ARN
 
         # Initialize boto3 client with credentials
-        self.emr_client = boto3.client(
-            "emr",
-            region_name=self.region,
-        )
+        # Use AWS profile if specified, otherwise use default credentials
+        if server_config.aws_profile:
+            logger.info(f"Using AWS profile: {server_config.aws_profile}")
+            boto_session = boto3.Session(
+                profile_name=server_config.aws_profile,
+                region_name=self.region,
+            )
+            self.emr_client = boto_session.client("emr")
+        else:
+            self.emr_client = boto3.client(
+                "emr",
+                region_name=self.region,
+            )
 
         self.session = requests.Session()
         self.persistent_ui_id: Optional[str] = None
