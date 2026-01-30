@@ -8,7 +8,7 @@ servers:
   # AWS EMR Spark History Server
   emr:
     default: false
-    emr_cluster_arn: "arn:aws:elasticmapreduce:us-east-1:348517286947:cluster/j-25XEQ6S0CFWF6"
+    emr_cluster_arn: "arn:aws:elasticmapreduce:us-east-1:348517286947:cluster/j-3GMMYC8G3KSWE"
     aws_profile: "prod"  # Use your prod AWS SSO profile
     timeout: 30
 
